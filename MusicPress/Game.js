@@ -5,7 +5,9 @@
 var score = 0;
 var oneThird = window.innerWidth / 3;
 var goalArray = [];
+var goal2Array = [];
 var musicAmount = 1;
+var musicDoubleAmount = 1;
 var difficulty = 120;
 var counter = 0;
 class Game
@@ -22,7 +24,8 @@ class Game
 
   this.game = new Game();
   document.addEventListener("keydown", this.keyDownHandler);
-  setInterval(this.createMusic, 5000);
+  //setInterval(this.createMusic, 5000);
+  //setInterval(this.createDoubleMusic, 5000);
   }
   createMusic()
   {
@@ -33,7 +36,6 @@ class Game
         if(spawnLocation === 0)
         {
         goalArray.push(new Goal(oneThird - 200,100,100,100));
-        //this.goalArray[i] = new Goal(100,100,50,50);
         }
         if(spawnLocation === 1)
         {
@@ -45,13 +47,36 @@ class Game
         }
       }
   }
+  createDoubleMusic()
+  {
+      console.log("createdDouble");
+      for(var i = 0; i < musicDoubleAmount; i++)
+      {
+        var spawnLocation = Math.floor(Math.random() * 3);
+        if(spawnLocation === 0)
+        {
+        goal2Array.push(new Goal2(oneThird - 200,100,100,100));
+        console.log("Spawn1");
+        }
+        if(spawnLocation === 1)
+        {
+        goal2Array.push(new Goal2(oneThird + oneThird - 200,100,100,100));
+        console.log("Spawn2");
+        }
+        if(spawnLocation === 2)
+        {
+        goal2Array.push(new Goal2(oneThird + oneThird + oneThird - 200,100,100,100));
+        console.log("Spawn3");
+        }
+      }
+  }
 
   update()
   {
     counter = counter + 1;
     if(counter >= difficulty)
     {
-      this.createMusic()
+      this.createMusic();
       counter = 0;
       difficulty = difficulty - 10;
       if (difficulty <= 0)
@@ -60,7 +85,12 @@ class Game
       difficulty = 120;
       }
     }
+    if(counter == 40)
+    {
+      this.createDoubleMusic();
+    }
   }
+
   response()
   {
     score = score + 10;
@@ -73,6 +103,7 @@ class Game
   ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
 
   ctx.fillStyle = "#FFFF00";
+  //ctx.fillStyle = "#2770e5";
   ctx.font = 'italic 30pt Calibri';
   ctx.textBaseline = "top";
   ctx.fillText("Score = " + score, 10,10);
@@ -86,6 +117,17 @@ class Game
     else
     {
     goalArray.splice(i,1);
+    }
+  }
+  for (var i = 0; i < goal2Array.length; i++)
+  {
+    if (goal2Array[i].lives > 0)
+    {
+    goal2Array[i].draw();
+    }
+    else
+    {
+    goal2Array.splice(i,1);
     }
   }
   this.player.draw();
@@ -128,6 +170,15 @@ class Game
               this.game.response();
             }
           }
+          for (var i = 0; i < goal2Array.length; i++)
+          {
+
+            if (this.player.checkCollision(goal2Array[i]) === true)
+            {
+              goal2Array[i].lives = goal2Array[i].lives - 1;
+              this.game.response();
+            }
+          }
         }
       if(xCord >= this.player2.x && xCord <= this.player2.x + this.player2.w && yCord >= this.player2.y && yCord <= this.player2.y + this.player2.h)
         {
@@ -137,6 +188,15 @@ class Game
             if (this.player2.checkCollision(goalArray[i]) === true)
             {
               goalArray[i].alive = false;
+              this.game.response();
+            }
+          }
+          for (var i = 0; i < goal2Array.length; i++)
+          {
+
+            if (this.player.checkCollision(goal2Array[i]) === true)
+            {
+              goal2Array[i].lives = goal2Array[i].lives - 1;
               this.game.response();
             }
           }
@@ -152,6 +212,15 @@ class Game
             this.game.response();
           }
         }
+        for (var i = 0; i < goal2Array.length; i++)
+        {
+
+          if (this.player.checkCollision(goal2Array[i]) === true)
+          {
+            goal2Array[i].lives = goal2Array[i].lives - 1;
+            this.game.response();
+          }
+        }
       }
 
   }
@@ -159,7 +228,6 @@ class Game
   {
 
     var ctx = document.getElementById("mycanvas").getContext("2d")
-    ctx.fillStyle = "#000000";
     // Code triggered when Left Arrow is pressed.
     if(e.keyCode === 37){
 

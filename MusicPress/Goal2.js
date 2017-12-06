@@ -2,7 +2,7 @@
  * @author brendanhorlick1997@gmail.com (Brendan Horlick)
  * date: 17/10/2017
  */
-class Goal
+class Goal2
 
 {
 
@@ -14,22 +14,22 @@ constructor(x,y,w,h)
 	this.w = w;
 	this.h = h;
 	this.alive = true;
+	this.lives = 2;
 }
 
 draw()
 {
-	if (this.alive === true)
+	if (this.lives > 0)
 	{
 	var ctx = document.getElementById("mycanvas").getContext("2d")
- 	ctx.strokeStyle = "#000000";
-
+ 	ctx.fillStyle = "#2770e5";
  	// args are x,y,width,height
 	//ctx.clearRect(this.x,this.y,this.w, this.h);
-  ctx.strokeRect(this.x,this.y,this.w,this.h);
+  ctx.fillRect(this.x,this.y,this.w,this.h);
 	this.y = this.y + 10;
 	if(this.y >= window.innerHeight + 100)
 	{
-		this.alive = false
+		this.lives = 0;
 	}
 }
 

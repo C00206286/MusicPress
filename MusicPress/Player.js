@@ -20,6 +20,7 @@ draw()
 {
 	var ctx = document.getElementById("mycanvas").getContext("2d")
  	ctx.fillStyle = "#000000";
+	//ctx.fillStyle = "#2770e5";
  	// args are x,y,width,height
   ctx.fillRect(this.x,this.y,this.w,this.h);
 
