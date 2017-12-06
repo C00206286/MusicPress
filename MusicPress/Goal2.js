@@ -26,6 +26,12 @@ draw()
  	// args are x,y,width,height
 	//ctx.clearRect(this.x,this.y,this.w, this.h);
   ctx.fillRect(this.x,this.y,this.w,this.h);
+
+}
+
+}
+update()
+{
 	this.y = this.y + 10;
 	if(this.y >= window.innerHeight + 100)
 	{
@@ -35,7 +41,5 @@ draw()
 		}
 		this.lives = 0;
 	}
-}
-
 }
 }

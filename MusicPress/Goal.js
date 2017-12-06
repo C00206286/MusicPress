@@ -22,10 +22,13 @@ draw()
 	{
 	var ctx = document.getElementById("mycanvas").getContext("2d")
  	ctx.strokeStyle = "#000000";
-
  	// args are x,y,width,height
 	//ctx.clearRect(this.x,this.y,this.w, this.h);
   ctx.strokeRect(this.x,this.y,this.w,this.h);
+  }
+}
+update()
+{
 	this.y = this.y + 10;
 	if(this.y >= window.innerHeight + 100)
 	{
@@ -34,5 +37,5 @@ draw()
 	}
 }
 
-}
+
 }

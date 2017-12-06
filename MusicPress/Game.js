@@ -40,7 +40,10 @@ class Game
   }
   lowerLives()
   {
+    if(this.lives > 0)
+    {
     this.lives = this.lives - 1;
+    }
   }
 
   createMusic()
@@ -89,6 +92,26 @@ class Game
 
   update()
   {
+      if (this.lives > 0)
+      {
+        for (var i = 0; i < goalArray.length; i++)
+        {
+          if (goalArray[i].alive === true)
+          {
+            goalArray[i].update();
+          }
+        }
+
+      for (var i = 0; i < goal2Array.length; i++)
+      {
+        if (goal2Array[i].lives > 0)
+        {
+        goal2Array[i].update();
+        }
+
+      }
+
+
     counter = counter + 1;
     if(counter >= difficulty)
     {
@@ -106,6 +129,8 @@ class Game
       this.createDoubleMusic();
     }
   }
+  }
+
 
   response()
   {
@@ -118,6 +143,14 @@ class Game
 
   ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
 
+  if (this.lives <= 0)
+  {
+    ctx.fillStyle = "#e50909";
+    //ctx.fillStyle = "#2770e5";
+    ctx.font = 'italic 60pt Calibri';
+    ctx.textBaseline = "top";
+    ctx.fillText("GAME OVER",(window.innerWidth / 2) - 180,(window.innerHeight / 2 - 100));
+  }
   ctx.fillStyle = "#FFFF00";
   //ctx.fillStyle = "#2770e5";
   ctx.font = 'italic 30pt Calibri';
@@ -181,6 +214,7 @@ class Game
     downPressed = false;
   }
   }
+
   checkCollision(xCord,yCord)
   {
       if(xCord >= this.player.x && xCord <= this.player.x + this.player.w && yCord >= this.player.y && yCord <= this.player.y + this.player.h)
