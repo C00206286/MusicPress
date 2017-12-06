@@ -25,7 +25,8 @@ function main()
 {
 	var canvas = initCanvas();
 	game = new Game();
-  game.init();
+  gameNS.game = game;
+  gameNS.game.init();
 
 	touchTest = new TouchTest();
   document.title = "Cool Game";
@@ -38,11 +39,11 @@ function main()
 
 }
 function update(delta) {
-    game.update();
+    gameNS.game.update();
 }
 
 function draw() {
-    game.draw();
+    gameNS.game.draw();
 }
 function panic() {
     delta = 0;
@@ -130,7 +131,7 @@ requestAnimationFrame(mainLoop);
  gameNS.swipeStartY = startY;
 
  gameNS.time1 = new Date()
- game.checkCollision(startX,startY);
+ gameNS.game.checkCollision(startX,startY);
 }
 /**
  * This function detects when a touch move event occurs.

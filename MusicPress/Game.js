@@ -9,9 +9,12 @@ var goal2Array = [];
 var musicAmount = 1;
 var musicDoubleAmount = 1;
 var difficulty = 120;
+
 var counter = 0;
+
 class Game
 {
+
   init()
   {
   console.log("Initialising game world");
@@ -26,7 +29,20 @@ class Game
   document.addEventListener("keydown", this.keyDownHandler);
   //setInterval(this.createMusic, 5000);
   //setInterval(this.createDoubleMusic, 5000);
+
+  this.lives = 10;
+
   }
+
+  getLives()
+  {
+    return this.lives;
+  }
+  lowerLives()
+  {
+    this.lives = this.lives - 1;
+  }
+
   createMusic()
   {
       console.log("created");
@@ -108,6 +124,16 @@ class Game
   ctx.textBaseline = "top";
   ctx.fillText("Score = " + score, 10,10);
 
+  ctx.fillStyle = "#FFFF00";
+  //ctx.fillStyle = "#2770e5";
+  ctx.font = 'italic 30pt Calibri';
+  ctx.textBaseline = "top";
+  ctx.fillText("Lives = " + this.lives, window.innerWidth - 220,10);
+
+  this.player.draw();
+  this.player2.draw();
+  this.player3.draw();
+
   for (var i = 0; i < goalArray.length; i++)
   {
     if (goalArray[i].alive === true)
@@ -130,9 +156,7 @@ class Game
     goal2Array.splice(i,1);
     }
   }
-  this.player.draw();
-  this.player2.draw();
-  this.player3.draw();
+
   // If the goal dies spawn one at one of three locations
 
 
@@ -194,7 +218,7 @@ class Game
           for (var i = 0; i < goal2Array.length; i++)
           {
 
-            if (this.player.checkCollision(goal2Array[i]) === true)
+            if (this.player2.checkCollision(goal2Array[i]) === true)
             {
               goal2Array[i].lives = goal2Array[i].lives - 1;
               this.game.response();
@@ -215,7 +239,7 @@ class Game
         for (var i = 0; i < goal2Array.length; i++)
         {
 
-          if (this.player.checkCollision(goal2Array[i]) === true)
+          if (this.player3.checkCollision(goal2Array[i]) === true)
           {
             goal2Array[i].lives = goal2Array[i].lives - 1;
             this.game.response();

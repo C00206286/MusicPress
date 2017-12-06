@@ -29,6 +29,10 @@ draw()
 	this.y = this.y + 10;
 	if(this.y >= window.innerHeight + 100)
 	{
+		if (this.alive = true)
+		{
+			gameNS.game.lowerLives();
+		}
 		this.lives = 0;
 	}
 }
