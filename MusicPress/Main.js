@@ -127,6 +127,9 @@ requestAnimationFrame(mainLoop);
  startX = touches[0].clientX;
  startY = touches[0].clientY;
 
+ endX= touches[0].clientX;
+ endY = touches[0].clientY;
+
  gameNS.swipeStartX = startX;
  gameNS.swipeStartY = startY;
 
@@ -184,7 +187,5 @@ if (timeTaken > 0 && timeTaken < 200 && distance >= 150)
 	//console.log("Swipe");
 	//ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
 }
-console.log(timeTaken);
-console.log("distance = " + distance);
 
 }

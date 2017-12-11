@@ -35,7 +35,7 @@ update()
 	this.y = this.y + 10;
 	if(this.y >= window.innerHeight)
 	{
-		if (this.alive = true)
+		if (this.alive == true)
 		{
 			gameNS.game.lowerLives();
 		}
