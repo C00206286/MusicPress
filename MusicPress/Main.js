@@ -12,6 +12,13 @@
 
 var gameNS = {};
 
+
+var x = 0, y = 0,
+    vx = 0, vy = 0,
+	ax = 0, ay = 0;
+
+//var sphere = document.getElementById("sphere");
+
 /**
  * main is the entry point for Javascript programs.
  * the game functions are called here.
@@ -51,7 +58,45 @@ function main()
 	document.addEventListener("touchmove", onTouchMove, {passive:false});
 	document.addEventListener("touchend", onTouchEnd);
 
+  if (window.DeviceMotionEvent != undefined) {
+  	window.ondevicemotion = function(e) {
+  		ax = event.accelerationIncludingGravity.x * 5;
+  		ay = event.accelerationIncludingGravity.y * 5;
+      console.log(ax);
+      console.log(ay);
+  		//document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
+  		//document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
+  		//document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
+
+  		if ( e.rotationRate ) {
+  			//document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
+  			//document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
+  			//document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+  		}
+  	}
+
+  	setInterval( function() {
+  		var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+  		if ( landscapeOrientation) {
+  			vx = vx + ay;
+  			vy = vy + ax;
+  		} else {
+  			vy = vy - ay;
+  			vx = vx + ax;
+  		}
+  		vx = vx * 0.98;
+  		vy = vy * 0.98;
+  		y = parseInt(y + vy / 50);
+  		x = parseInt(x + vx / 50);
+
+
+  	}, 25);
+  }
+
 }
+
+
+
 function update(delta) {
   if(gameNS.sceneManager.index === 2)
   {
