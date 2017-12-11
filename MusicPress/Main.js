@@ -1,9 +1,4 @@
-/**
- * main is the entry point for Javascript programs.
- * @author brendanhorlick1997@gmail.com (Brendan Horlick)
- * date: 25/10/2017
- * time: 4 hours
- */
+
 
  lastFrameTimeMs = 0,
  maxFPS = 60,
@@ -29,10 +24,23 @@ function main()
   gameNS.soundManager.loadSoundFile('background', "backgroundCut.mp3");
   gameNS.soundManager.loadSoundFile('back', "back.mp3");
 
-	game = new Game();
+
+  gameNS.sceneManager = new SceneManager();
+  gameNS.titleScreen = new TitleScreen('Title');
+  gameNS.menuScreen = new MainMenu('Menu');
+  gameNS.gameScreen = new GameScreen('GameScreen');
+  gameNS.optionsScreen = new OptionsScreen('OptionScreen');
+
+  gameNS.sceneManager.createScene(gameNS.titleScreen);
+  gameNS.sceneManager.createScene(gameNS.menuScreen);
+  gameNS.sceneManager.createScene(gameNS.gameScreen);
+  gameNS.sceneManager.createScene(gameNS.optionsScreen);
+
+  gameNS.sceneManager.jumpToScene('Title');
+
+  game = new Game();
   gameNS.game = game;
   gameNS.game.init();
-
 
 	touchTest = new TouchTest();
   document.title = "Cool Game";
@@ -45,11 +53,21 @@ function main()
 
 }
 function update(delta) {
+  if(gameNS.sceneManager.index === 2)
+  {
     gameNS.game.update();
+  }
 }
 
 function draw() {
+  if(gameNS.sceneManager.index === 2)
+  {
     gameNS.game.draw();
+  }
+  if(gameNS.sceneManager.index != 2)
+  {
+  gameNS.sceneManager.render();
+  }
 }
 function panic() {
     delta = 0;
@@ -140,6 +158,17 @@ requestAnimationFrame(mainLoop);
  gameNS.swipeStartY = startY;
 
  gameNS.time1 = new Date()
+
+ if(gameNS.sceneManager.index === 0)
+ {
+   gameNS.titleScreen.checkCollisionTitle(startX,startY);
+ }
+
+ else if(gameNS.sceneManager.index === 1)
+ {
+   gameNS.menuScreen.checkCollisionMenu(startX,startY);
+ }
+
  gameNS.game.checkCollision(startX,startY);
 }
 /**

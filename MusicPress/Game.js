@@ -1,7 +1,5 @@
-/**
- * @author brendanhorlick1997@gmail.com (Brendan Horlick)
- * date: 17/10/2017
- */
+
+
 var score = 0;
 var oneThird = window.innerWidth / 3;
 var goalArray = [];
@@ -17,6 +15,8 @@ var musicStarted = false;
 
 class Game
 {
+
+
 
   init()
   {
@@ -161,7 +161,7 @@ class Game
   }
   draw()
   {
-  var ctx = document.getElementById("mycanvas").getContext("2d")
+  var ctx = document.getElementById("mycanvas").getContext("2d");
 
   ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
 
