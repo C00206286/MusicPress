@@ -10,6 +10,8 @@ var musicAmount = 1;
 var musicDoubleAmount = 1;
 var difficulty = 120;
 
+var somethingCollided = false;
+
 var counter = 0;
 
 class Game
@@ -135,7 +137,16 @@ class Game
   response()
   {
     score = score + 10;
-
+  }
+  response2()
+  {
+    if(score > 0)
+    {
+    score = score - 10;
+    }
+    else {
+      gameNS.game.lowerLives();
+    }
   }
   draw()
   {
@@ -151,17 +162,17 @@ class Game
     ctx.textBaseline = "top";
     ctx.fillText("GAME OVER",(window.innerWidth / 2) - 180,(window.innerHeight / 2 - 100));
   }
-  ctx.fillStyle = "#FFFF00";
+  ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";
-  ctx.font = 'italic 30pt Calibri';
+  ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
   ctx.fillText("Score = " + score, 10,10);
 
-  ctx.fillStyle = "#FFFF00";
+  ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";
-  ctx.font = 'italic 30pt Calibri';
+  ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
-  ctx.fillText("Lives = " + this.lives, window.innerWidth - 220,10);
+  ctx.fillText("Lives = " + this.lives, window.innerWidth - 260,10);
 
   this.player.draw();
   this.player2.draw();
@@ -226,6 +237,7 @@ class Game
             {
               goalArray[i].alive = false;
               this.game.response();
+              somethingCollided = true;
             }
           }
           for (var i = 0; i < goal2Array.length; i++)
@@ -235,8 +247,14 @@ class Game
             {
               goal2Array[i].lives = goal2Array[i].lives - 1;
               this.game.response();
+              somethingCollided = true;
             }
           }
+          if(somethingCollided == false)
+          {
+            this.game.response2();
+          }
+          somethingCollided = false;
         }
       if(xCord >= this.player2.x && xCord <= this.player2.x + this.player2.w && yCord >= this.player2.y && yCord <= this.player2.y + this.player2.h)
         {
@@ -247,6 +265,7 @@ class Game
             {
               goalArray[i].alive = false;
               this.game.response();
+              somethingCollided = true;
             }
           }
           for (var i = 0; i < goal2Array.length; i++)
@@ -256,8 +275,14 @@ class Game
             {
               goal2Array[i].lives = goal2Array[i].lives - 1;
               this.game.response();
+              somethingCollided = true;
             }
           }
+          if(somethingCollided == false)
+          {
+            this.game.response2();
+          }
+          somethingCollided = false;
         }
       if(xCord >= this.player3.x && xCord <= this.player3.x + this.player3.w && yCord >= this.player3.y && yCord <= this.player3.y + this.player3.h)
       {
@@ -268,6 +293,7 @@ class Game
           {
             goalArray[i].alive = false;
             this.game.response();
+            somethingCollided = true;
           }
         }
         for (var i = 0; i < goal2Array.length; i++)
@@ -277,8 +303,14 @@ class Game
           {
             goal2Array[i].lives = goal2Array[i].lives - 1;
             this.game.response();
+            somethingCollided = true;
           }
         }
+        if(somethingCollided == false)
+        {
+          this.game.response2();
+        }
+        somethingCollided = false;
       }
 
   }

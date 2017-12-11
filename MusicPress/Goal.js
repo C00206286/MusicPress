@@ -30,7 +30,7 @@ draw()
 update()
 {
 	this.y = this.y + 10;
-	if(this.y >= window.innerHeight + 100)
+	if(this.y >= window.innerHeight)
 	{
 		gameNS.game.lowerLives();
 		this.alive = false;
