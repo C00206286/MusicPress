@@ -140,6 +140,7 @@ class Game
   }
   response2()
   {
+    gameNS.soundManager.playSound('gun');
     if(score > 0)
     {
     score = score - 10;

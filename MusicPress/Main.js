@@ -28,6 +28,10 @@ function main()
   gameNS.game = game;
   gameNS.game.init();
 
+  gameNS.soundManager = new SoundManager();
+	gameNS.soundManager.init();
+	gameNS.soundManager.loadSoundFile('gun', "gun.mp3");
+
 	touchTest = new TouchTest();
   document.title = "Cool Game";
   touchTest.is_touch_device();
