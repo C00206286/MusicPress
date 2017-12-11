@@ -24,13 +24,15 @@ var gameNS = {};
 function main()
 {
 	var canvas = initCanvas();
+  gameNS.soundManager = new SoundManager();
+  gameNS.soundManager.init();
+  gameNS.soundManager.loadSoundFile('background', "backgroundCut.mp3");
+  gameNS.soundManager.loadSoundFile('back', "back.mp3");
+
 	game = new Game();
   gameNS.game = game;
   gameNS.game.init();
 
-  gameNS.soundManager = new SoundManager();
-	gameNS.soundManager.init();
-	gameNS.soundManager.loadSoundFile('gun', "gun.mp3");
 
 	touchTest = new TouchTest();
   document.title = "Cool Game";

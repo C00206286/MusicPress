@@ -13,6 +13,7 @@ var difficulty = 120;
 var somethingCollided = false;
 
 var counter = 0;
+var musicStarted = false;
 
 class Game
 {
@@ -31,11 +32,16 @@ class Game
   document.addEventListener("keydown", this.keyDownHandler);
   //setInterval(this.createMusic, 5000);
   //setInterval(this.createDoubleMusic, 5000);
-
   this.lives = 10;
 
-  }
 
+
+  }
+  startMusic()
+  {
+    gameNS.soundManager.playSound('background',true,0.8);
+    musicStarted = true;
+  }
   getLives()
   {
     return this.lives;
@@ -115,6 +121,10 @@ class Game
 
 
     counter = counter + 1;
+    if(counter == 10 && musicStarted == false)
+    {
+    this.startMusic();
+    }
     if(counter >= difficulty)
     {
       this.createMusic();
@@ -140,7 +150,7 @@ class Game
   }
   response2()
   {
-    gameNS.soundManager.playSound('gun');
+    gameNS.soundManager.playSound('back',false,0.1);
     if(score > 0)
     {
     score = score - 10;
