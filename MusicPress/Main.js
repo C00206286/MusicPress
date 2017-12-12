@@ -35,8 +35,8 @@ function main(superHeroes)
   gameNS.sceneManager = new SceneManager();
   gameNS.titleScreen = new TitleScreen('Title');
   gameNS.menuScreen = new MainMenu('Menu');
-  gameNS.gameScreen = new GameScreen('GameScreen');
   gameNS.optionsScreen = new OptionsScreen('OptionScreen');
+  gameNS.gameScreen = new GameScreen('GameScreen');
   gameNS.creditsScreen = new CreditsScreen('CreditsScreen', superHeroes);
 
   gameNS.sceneManager.createScene(gameNS.titleScreen);
