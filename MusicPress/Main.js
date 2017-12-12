@@ -28,8 +28,9 @@ function main(superHeroes)
 	var canvas = initCanvas();
   gameNS.soundManager = new SoundManager();
   gameNS.soundManager.init();
-  gameNS.soundManager.loadSoundFile('background', "backgroundCut.mp3");
+  gameNS.soundManager.loadSoundFile('background', "background.mp3");
   gameNS.soundManager.loadSoundFile('back', "back.mp3");
+  gameNS.soundManager.loadSoundFile('clap', "CP.mp3");
 
 
   gameNS.sceneManager = new SceneManager();

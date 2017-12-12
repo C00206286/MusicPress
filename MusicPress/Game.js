@@ -11,10 +11,12 @@ var difficulty = 120;
 var somethingCollided = false;
 var scoreMultiplier = 1;
 
+var startDificulty = 120;
+
 var counter = 0;
 var musicStarted = false;
 
-var tutorialOver = false;
+var tutorialOver = true;
 
 var tutorialCounter = 0;
 
@@ -195,7 +197,12 @@ class Game
       if (difficulty <= 0)
       {
       console.log("reset")
-      difficulty = 120;
+      startDificulty = startDificulty - 20;
+      if(startDificulty <= 30)
+      {
+        startDificulty = 120;
+      }
+      difficulty = startDificulty;
       }
     }
     if(counter == 40)
@@ -210,6 +217,7 @@ class Game
   response()
   {
     score = score + 10 * scoreMultiplier;
+    gameNS.soundManager.playSound('clap',false,0.05);
   }
   response2()
   {
