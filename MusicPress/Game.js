@@ -9,6 +9,7 @@ var musicDoubleAmount = 1;
 var difficulty = 120;
 
 var somethingCollided = false;
+var scoreMultiplyer = 1;
 
 var counter = 0;
 var musicStarted = false;
@@ -137,6 +138,25 @@ class Game
 
     	}, 25);
     }
+
+    if(ax <= -30 || ax >= 30)
+    {
+      scoreMultiplyer = 4;
+    }
+    else if(ax <= -20 || ax >= 20)
+    {
+      scoreMultiplyer = 3;
+    }
+    else if(ax <= -10 || ax >= 10)
+    {
+      scoreMultiplyer = 2;
+    }
+    else
+    {
+      scoreMultiplyer = 1;
+    }
+
+
       if (this.lives > 0)
       {
         for (var i = 0; i < goalArray.length; i++)
@@ -183,7 +203,7 @@ class Game
 
   response()
   {
-    score = score + 10;
+    score = score + 10 * scoreMultiplyer;
   }
   response2()
   {
@@ -220,17 +240,7 @@ class Game
   //ctx.fillStyle = "#2770e5";
   ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
-  ctx.fillText("AX = " + ax, 10,40);
-
-
-
-  ctx.fillStyle = "#7125a8";
-  //ctx.fillStyle = "#2770e5";
-  ctx.font = 'italic 40pt Calibri';
-  ctx.textBaseline = "top";
-  ctx.fillText("AY = " + ay, 10,140);
-
-
+  ctx.fillText("Multiplyer = " + scoreMultiplyer, 10,60);
 
   ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";
