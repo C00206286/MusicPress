@@ -7,8 +7,6 @@ class MainMenu extends Scene
     this.width = window.innerWidth;
     this.height = window.innerHeight;
 
-    this.createDiv("Play");
-
     this.xPlay = 50;
     this.yPlay = 100;
     this.heightPlay = 100;
@@ -29,21 +27,6 @@ class MainMenu extends Scene
     this.widthExit = 300;
     this.heightExit = 100;
   }
-  createDiv(divId)
-  {
-    var div = document.createElement("div");
-    div.id = divId;
-    if(div.id === "Play")
-    {
-      div.innerHTML = '<img src=\'play.png\'>';
-      this.div = div;
-
-      div.style.position = "absolute";
-      div.style.left = (this.width/ 2) - 135 + "px";
-      div.style.top = (this.height/ 8) + 40 + "px";
-    }
-
-  }
 
   checkCollisionMenu(xCord, yCord)
   {
@@ -53,7 +36,7 @@ class MainMenu extends Scene
      }
      if(xCord >= this.xOptions && xCord <= this.xOptions + this.widthOptions && yCord >= this.yOptions && yCord <= this.yOptions + this.heightOptions)
      {
-       gameNS.sceneManager.jumpToScene('OptionScreen');
+       gameNS.sceneManager.jumpToScene('CreditsScreen');
      }
   }
   render()

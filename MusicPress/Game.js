@@ -13,6 +13,10 @@ var somethingCollided = false;
 var counter = 0;
 var musicStarted = false;
 
+var x = 0, y = 0, z = 0,
+    vx = 0, vy = 0,
+  ax = 0, ay = 0;
+
 class Game
 {
 
@@ -22,8 +26,6 @@ class Game
   {
   console.log("Initialising game world");
   var ctx = document.getElementById("mycanvas").getContext("2d")
-  console.log(window.innerWidth);
-  console.log(oneThird);
   this.player = new Player(oneThird - 250,window.innerHeight - 200,200,200);
   this.player2 = new Player(oneThird + oneThird - 250,window.innerHeight - 200,200,200);
   this.player3 = new Player(oneThird + oneThird + oneThird -250,window.innerHeight - 200,200,200);
@@ -100,6 +102,41 @@ class Game
 
   update()
   {
+
+
+
+    if (window.DeviceMotionEvent != undefined) {
+    	window.ondevicemotion = function(e) {
+    		ax = event.accelerationIncludingGravity.x * 5;
+    		ay = event.accelerationIncludingGravity.y * 5;
+    		x = e.accelerationIncludingGravity.x;
+    		y = e.accelerationIncludingGravity.y;
+    		z = e.accelerationIncludingGravity.z;
+
+
+    		//if ( e.rotationRate ) {
+    		//	document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
+    		//	document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
+    		//	document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+    		//}
+    	}
+
+    	setInterval( function() {
+    		var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+    		if ( landscapeOrientation) {
+    			vx = vx + ay;
+    			vy = vy + ax;
+    		} else {
+    			vy = vy - ay;
+    			vx = vx + ax;
+    		}
+    		vx = vx * 0.98;
+    		vy = vy * 0.98;
+    		y = parseInt(y + vy / 50);
+    		x = parseInt(x + vx / 50);
+
+    	}, 25);
+    }
       if (this.lives > 0)
       {
         for (var i = 0; i < goalArray.length; i++)
@@ -178,6 +215,22 @@ class Game
   ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
   ctx.fillText("Score = " + score, 10,10);
+
+  ctx.fillStyle = "#7125a8";
+  //ctx.fillStyle = "#2770e5";
+  ctx.font = 'italic 40pt Calibri';
+  ctx.textBaseline = "top";
+  ctx.fillText("AX = " + ax, 10,40);
+
+
+
+  ctx.fillStyle = "#7125a8";
+  //ctx.fillStyle = "#2770e5";
+  ctx.font = 'italic 40pt Calibri';
+  ctx.textBaseline = "top";
+  ctx.fillText("AY = " + ay, 10,140);
+
+
 
   ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";

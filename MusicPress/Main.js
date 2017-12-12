@@ -23,7 +23,7 @@ var x = 0, y = 0,
  * main is the entry point for Javascript programs.
  * the game functions are called here.
  */
-function main()
+function main(superHeroes)
 {
 	var canvas = initCanvas();
   gameNS.soundManager = new SoundManager();
@@ -37,11 +37,13 @@ function main()
   gameNS.menuScreen = new MainMenu('Menu');
   gameNS.gameScreen = new GameScreen('GameScreen');
   gameNS.optionsScreen = new OptionsScreen('OptionScreen');
+  gameNS.creditsScreen = new CreditsScreen('CreditsScreen', superHeroes);
 
   gameNS.sceneManager.createScene(gameNS.titleScreen);
   gameNS.sceneManager.createScene(gameNS.menuScreen);
   gameNS.sceneManager.createScene(gameNS.gameScreen);
   gameNS.sceneManager.createScene(gameNS.optionsScreen);
+  gameNS.sceneManager.createScene(gameNS.creditsScreen);
 
   gameNS.sceneManager.jumpToScene('Title');
 
@@ -57,41 +59,6 @@ function main()
 	document.addEventListener("touchstart", onTouchStart);
 	document.addEventListener("touchmove", onTouchMove, {passive:false});
 	document.addEventListener("touchend", onTouchEnd);
-
-  if (window.DeviceMotionEvent != undefined) {
-  	window.ondevicemotion = function(e) {
-  		ax = event.accelerationIncludingGravity.x * 5;
-  		ay = event.accelerationIncludingGravity.y * 5;
-      console.log(ax);
-      console.log(ay);
-  		//document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
-  		//document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
-  		//document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
-
-  		if ( e.rotationRate ) {
-  			//document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
-  			//document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
-  			//document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
-  		}
-  	}
-
-  	setInterval( function() {
-  		var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
-  		if ( landscapeOrientation) {
-  			vx = vx + ay;
-  			vy = vy + ax;
-  		} else {
-  			vy = vy - ay;
-  			vx = vx + ax;
-  		}
-  		vx = vx * 0.98;
-  		vy = vy * 0.98;
-  		y = parseInt(y + vy / 50);
-  		x = parseInt(x + vx / 50);
-
-
-  	}, 25);
-  }
 
 }
 

@@ -24,5 +24,6 @@ class OptionsScreen extends Scene
     var ctx = canvas.getContext('2d');
     ctx.font = '48px Agency FB';
     ctx.fillText(this.title, 10, 50);
+    
   }
 }

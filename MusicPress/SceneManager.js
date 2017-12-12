@@ -48,7 +48,6 @@ class SceneManager
 
   render()
   {
-    console.log("render called");
   //  var canvas = document.getElementById('mycanvas');
     //canvas.id = "mycanvas";
     //canvas.width = window.innerWidth;
