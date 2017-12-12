@@ -9,10 +9,14 @@ var musicDoubleAmount = 1;
 var difficulty = 120;
 
 var somethingCollided = false;
-var scoreMultiplyer = 1;
+var scoreMultiplier = 1;
 
 var counter = 0;
 var musicStarted = false;
+
+var tutorialOver = false;
+
+var tutorialCounter = 0;
 
 var x = 0, y = 0, z = 0,
     vx = 0, vy = 0,
@@ -141,19 +145,19 @@ class Game
 
     if(ax <= -30 || ax >= 30)
     {
-      scoreMultiplyer = 4;
+      scoreMultiplier = 4;
     }
     else if(ax <= -20 || ax >= 20)
     {
-      scoreMultiplyer = 3;
+      scoreMultiplier = 3;
     }
     else if(ax <= -10 || ax >= 10)
     {
-      scoreMultiplyer = 2;
+      scoreMultiplier = 2;
     }
     else
     {
-      scoreMultiplyer = 1;
+      scoreMultiplier = 1;
     }
 
 
@@ -176,7 +180,8 @@ class Game
 
       }
 
-
+    if(tutorialOver == true)
+    {
     counter = counter + 1;
     if(counter == 10 && musicStarted == false)
     {
@@ -198,12 +203,13 @@ class Game
       this.createDoubleMusic();
     }
   }
+}
   }
 
 
   response()
   {
-    score = score + 10 * scoreMultiplyer;
+    score = score + 10 * scoreMultiplier;
   }
   response2()
   {
@@ -221,6 +227,51 @@ class Game
   var ctx = document.getElementById("mycanvas").getContext("2d");
 
   ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+
+
+  // Code for tutorial
+  if(tutorialOver == false)
+  {
+    var ctx = document.getElementById("mycanvas").getContext("2d");
+    tutorialCounter = tutorialCounter + 1;
+    if(tutorialCounter <= 80)
+    {
+    ctx.fillStyle = "#e50909";
+    //ctx.fillStyle = "#2770e5";
+    ctx.font = 'italic 30pt Calibri';
+    ctx.textBaseline = "top";
+    ctx.fillText("Tap your button when the block is inside",10,200);
+    }
+    if(tutorialCounter > 120 && tutorialCounter < 220)
+    {
+    ctx.fillStyle = "#e50909";
+    //ctx.fillStyle = "#2770e5";
+    ctx.font = 'italic 30pt Calibri';
+    ctx.textBaseline = "top";
+    ctx.fillText("Blue blocks need to be hit twice",10,200);
+    }
+    if(tutorialCounter > 240)
+    {
+    ctx.fillStyle = "#e50909";
+    //ctx.fillStyle = "#2770e5";
+    ctx.font = 'italic 30pt Calibri';
+    ctx.textBaseline = "top";
+    ctx.fillText("Tilt your device for a higher multiplier",10,200);
+        if(scoreMultiplier === 2)
+        {
+          tutorialOver = true;
+        }
+    }
+    if(tutorialCounter === 80)
+    {
+      this.createMusic();
+    }
+    if(tutorialCounter === 200)
+    {
+      this.createDoubleMusic();
+    }
+
+  }
 
   if (this.lives <= 0)
   {
@@ -240,7 +291,7 @@ class Game
   //ctx.fillStyle = "#2770e5";
   ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
-  ctx.fillText("Multiplyer = " + scoreMultiplyer, 10,60);
+  ctx.fillText("Multiplier = " + scoreMultiplier, 10,60);
 
   ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";
