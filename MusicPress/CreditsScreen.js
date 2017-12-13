@@ -1,10 +1,10 @@
 class CreditsScreen extends Scene
 {
-  constructor(title, superHeroes)
+  constructor(title, developers)
   {
     super(title);
 
-    this.superHeroes = superHeroes;
+    this.developers = developers;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
   }
@@ -26,7 +26,7 @@ class CreditsScreen extends Scene
     ctx.font = '48px Agency FB';
     ctx.fillText(this.title, 10, 50);
 
-    this.showHeroes(this.superHeroes);
+    this.showHeroes(this.developers);
 
   }
 

@@ -23,7 +23,7 @@ var x = 0, y = 0,
  * main is the entry point for Javascript programs.
  * the game functions are called here.
  */
-function main(superHeroes)
+function main(developers)
 {
 	var canvas = initCanvas();
   gameNS.soundManager = new SoundManager();
@@ -38,7 +38,7 @@ function main(superHeroes)
   gameNS.menuScreen = new MainMenu('Menu');
   gameNS.optionsScreen = new OptionsScreen('OptionScreen');
   gameNS.gameScreen = new GameScreen('GameScreen');
-  gameNS.creditsScreen = new CreditsScreen('CreditsScreen', superHeroes);
+  gameNS.creditsScreen = new CreditsScreen('CreditsScreen', developers);
 
   gameNS.sceneManager.createScene(gameNS.titleScreen);
   gameNS.sceneManager.createScene(gameNS.menuScreen);
