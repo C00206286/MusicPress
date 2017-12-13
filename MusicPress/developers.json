@@ -1,0 +1,34 @@
+{
+  "teamName" : "Music Press",
+  "homeTown" : "ITC",
+  "formed" : 2018,
+  "secretBase" : "Lab 216",
+  "active" : true,
+  "members" : [
+    {
+      "name" : "Brendan Horlick",
+      "age" : 20,
+      "secretIdentity" : "Brendin",
+      "powers" : [
+        "Very messy code",
+        "Googling"
+      ]
+    },
+    {
+      "name" : "Jake Commiskey",
+      "age" : 20,
+      "secretIdentity" : "The Snake",
+      "powers" : [
+        "Can play guitar"
+      ]
+    },
+    {
+      "name" : "Google",
+      "age" : 19,
+      "secretIdentity" : "Magic Box",
+      "powers" : [
+        "Knows everything"
+      ]
+    }
+  ]
+}
