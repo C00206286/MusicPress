@@ -120,7 +120,12 @@ class OptionsScreen extends Scene
     var ctxTitle = canvas.getContext('2d');
     ctxTitle.font = '30px Agent Orange';
     ctxTitle.fillStyle = "#000000";
-    ctx.fillText("Choose the colour of your buttons", 400, 160);
+    ctx.fillText("Choose the colour", 400, 140);
+
+    var ctxTitle = canvas.getContext('2d');
+    ctxTitle.font = '30px Agent Orange';
+    ctxTitle.fillStyle = "#000000";
+    ctx.fillText("of your buttons", 400, 170);
 
 
   }

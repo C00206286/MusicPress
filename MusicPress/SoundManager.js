@@ -1,6 +1,6 @@
 /**
  *<ul>
- *<li>Jamie Murphy
+ *<li>Jake Commiskey
  *<li>This proramme will out put a square onto the screem
  *<li>and let the user move the square via arrow keys
  *</ul>
