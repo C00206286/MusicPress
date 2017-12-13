@@ -1,6 +1,6 @@
 
 
-var score = 0;
+gameNS.score = 0;
 var oneThird = window.innerWidth / 3;
 var goalArray = [];
 var goal2Array = [];
@@ -41,7 +41,7 @@ class Game
   document.addEventListener("keydown", this.keyDownHandler);
   //setInterval(this.createMusic, 5000);
   //setInterval(this.createDoubleMusic, 5000);
-  this.lives = 10;
+  gameNS.lives = 10;
 
 
 
@@ -53,13 +53,13 @@ class Game
   }
   getLives()
   {
-    return this.lives;
+    return gameNS.lives;
   }
   lowerLives()
   {
-    if(this.lives > 0)
+    if(gameNS.lives > 0)
     {
-    this.lives = this.lives - 1;
+    gameNS.lives = gameNS.lives - 1;
     }
   }
 
@@ -163,7 +163,7 @@ class Game
     }
 
 
-      if (this.lives > 0)
+      if (gameNS.lives > 0)
       {
         for (var i = 0; i < goalArray.length; i++)
         {
@@ -216,15 +216,15 @@ class Game
 
   response()
   {
-    score = score + 10 * scoreMultiplier;
+    gameNS.score = gameNS.score + 10 * scoreMultiplier;
     gameNS.soundManager.playSound('clap',false,0.05);
   }
   response2()
   {
     gameNS.soundManager.playSound('back',false,0.1);
-    if(score > 0)
+    if(gameNS.score > 0)
     {
-    score = score - 10;
+    gameNS.score = gameNS.score - 10;
     }
     else {
       gameNS.game.lowerLives();
@@ -236,6 +236,12 @@ class Game
 
   ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
 
+  if (gameNS.lives <= 0)
+  {
+    goalArray = [];
+    goal2Array = [];
+    gameNS.sceneManager.jumpToScene('GameOver');
+  }
 
   // Code for tutorial
   if(tutorialOver == false)
@@ -281,19 +287,12 @@ class Game
 
   }
 
-  if (this.lives <= 0)
-  {
-    ctx.fillStyle = "#e50909";
-    //ctx.fillStyle = "#2770e5";
-    ctx.font = 'italic 60pt Calibri';
-    ctx.textBaseline = "top";
-    ctx.fillText("GAME OVER",(window.innerWidth / 2) - 180,(window.innerHeight / 2 - 100));
-  }
+
   ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";
   ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
-  ctx.fillText("Score = " + score, 10,10);
+  ctx.fillText("Score = " + gameNS.score, 10,10);
 
   ctx.fillStyle = "#7125a8";
   //ctx.fillStyle = "#2770e5";
@@ -305,7 +304,7 @@ class Game
   //ctx.fillStyle = "#2770e5";
   ctx.font = 'italic 40pt Calibri';
   ctx.textBaseline = "top";
-  ctx.fillText("Lives = " + this.lives, window.innerWidth - 260,10);
+  ctx.fillText("Lives = " + gameNS.lives, window.innerWidth - 260,10);
 
   this.player.draw();
   this.player2.draw();

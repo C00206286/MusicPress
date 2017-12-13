@@ -2,6 +2,8 @@
  * @author brendanhorlick1997@gmail.com (Brendan Horlick)
  * date: 17/10/2017
  */
+
+
 class Player
 
 {
@@ -19,7 +21,7 @@ constructor(x,y,w,h)
 draw()
 {
 	var ctx = document.getElementById("mycanvas").getContext("2d")
- 	ctx.fillStyle = "#000000";
+ 	ctx.fillStyle = gameNS.colour;
 	//ctx.fillStyle = "#2770e5";
  	// args are x,y,width,height
   ctx.fillRect(this.x,this.y,this.w,this.h);

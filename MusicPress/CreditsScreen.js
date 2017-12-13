@@ -7,7 +7,22 @@ class CreditsScreen extends Scene
     this.developers = developers;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+
+    this.xBack = 200;
+    this.yBack = 1000;
+    this.heightBack = 300;
+    this.widthBack = 100;
+
   }
+
+  checkCollisionGameCredits(xCord, yCord)
+  {
+    if(xCord >= this.xBack && xCord <= this.xBack + this.widthBack && yCord >= this.yBack && yCord <= this.yBack + this.heightBack)
+     {
+       gameNS.sceneManager.jumpToScene('MainMenu');
+       gameNS.sceneManager.index = 1;
+     }
+   }
 
   render()
   {
@@ -22,18 +37,28 @@ class CreditsScreen extends Scene
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    var ctx = canvas.getContext('2d');
+
     ctx.font = '48px Agency FB';
     ctx.fillText(this.title, 10, 50);
 
-    this.showHeroes(this.developers);
+
+    ctx.fillStyle ="#000000";
+    // args are x,y,width,height
+    ctx.fillRect(this.xBack, this.yBack, this.heightBack, this.widthBack);
+
+
+    ctx.font = '48px Agency FB';
+    ctx.fillStyle = "#000000";
+    ctx.fillText("Back", 300, 1050);
+
+    this.showDevelopers(this.developers);
 
   }
 
-  showHeroes(jsonObj) {
-    var heroes = jsonObj['members'];
+  showDevelopers(jsonObj) {
+    var developers = jsonObj['members'];
 
-    for(var i = 0; i < heroes.length; i++) {
+    for(var i = 0; i < developers.length; i++) {
       var myArticle = document.createElement('article');
       var myH2 = document.createElement('h2');
       var myPara1 = document.createElement('p');
@@ -42,12 +67,18 @@ class CreditsScreen extends Scene
       var myList = document.createElement('ul');
 
 
-      myH2.textContent = heroes[i].name;
-      myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
-      myPara2.textContent = 'Age: ' + heroes[i].age;
+      myH2.textContent = developers[i].name;
+      myPara1.textContent = 'Secret identity: ' + developers[i].secretIdentity;
+      myPara2.textContent = 'Age: ' + developers[i].age;
       myPara3.textContent = 'Superpowers:';
 
-      var superPowers = heroes[i].powers;
+      var canvas = document.getElementById('mycanvas');
+      var ctx = canvas.getContext('2d');
+      ctx.font = '48px Agency FB';
+      ctx.fillStyle = "#000000";
+      ctx.fillText(myH2.textContent, 300, 100 * (i + 1));
+
+      var superPowers = developers[i].powers;
       for(var j = 0; j < superPowers.length; j++) {
         var listItem = document.createElement('li');
         listItem.textContent = superPowers[j];
@@ -59,7 +90,7 @@ class CreditsScreen extends Scene
       myArticle.appendChild(myPara2);
       myArticle.appendChild(myPara3);
       myArticle.appendChild(myList);
-      console.log(myH2);
+
     //  section.appendChild(myArticle);
     }
   }

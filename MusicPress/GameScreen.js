@@ -21,7 +21,6 @@ class GameScreen extends Scene
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    var ctx = canvas.getContext('2d');
     ctx.font = '48px Agency FB';
     ctx.fillText(this.title, 10, 50);
   }

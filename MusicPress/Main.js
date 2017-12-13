@@ -38,16 +38,19 @@ function main(developers)
   gameNS.menuScreen = new MainMenu('Menu');
   gameNS.optionsScreen = new OptionsScreen('OptionScreen');
   gameNS.gameScreen = new GameScreen('GameScreen');
+  gameNS.gameOver = new GameOver('GameOver');
   gameNS.creditsScreen = new CreditsScreen('CreditsScreen', developers);
 
   gameNS.sceneManager.createScene(gameNS.titleScreen);
   gameNS.sceneManager.createScene(gameNS.menuScreen);
   gameNS.sceneManager.createScene(gameNS.gameScreen);
   gameNS.sceneManager.createScene(gameNS.optionsScreen);
+  gameNS.sceneManager.createScene(gameNS.gameOver);
   gameNS.sceneManager.createScene(gameNS.creditsScreen);
 
   gameNS.sceneManager.jumpToScene('Title');
 
+  gameNS.colour = "#000000"
   game = new Game();
   gameNS.game = game;
   gameNS.game.init();
@@ -180,6 +183,19 @@ requestAnimationFrame(mainLoop);
  else if(gameNS.sceneManager.index === 1)
  {
    gameNS.menuScreen.checkCollisionMenu(startX,startY);
+ }
+ else if(gameNS.sceneManager.index === 4)
+ {
+   gameNS.gameOver.checkCollisionGameOver(startX,startY);
+ }
+ else if(gameNS.sceneManager.index === 3)
+ {
+   gameNS.optionsScreen.checkCollisionOptions(startX,startY);
+ }
+
+ if(gameNS.sceneManager.index === 5)
+ {
+   gameNS.creditsScreen.checkCollisionGameCredits(startX, startY);
  }
 
  gameNS.game.checkCollision(startX,startY);

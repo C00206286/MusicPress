@@ -17,10 +17,10 @@ class MainMenu extends Scene
     this.widthOptions = 300;
     this.heightOptions = 100;
 
-    this.xLeader = 100;
-    this.yLeader = 500;
-    this.widthLeader = 300;
-    this.heightLeader = 100;
+    this.xCredits = 100;
+    this.yCredits = 500;
+    this.widthCredits = 300;
+    this.heightCredits = 100;
 
     this.xExit = 125;
     this.yExit = 700;
@@ -35,6 +35,11 @@ class MainMenu extends Scene
        gameNS.sceneManager.jumpToScene('GameScreen');
      }
      if(xCord >= this.xOptions && xCord <= this.xOptions + this.widthOptions && yCord >= this.yOptions && yCord <= this.yOptions + this.heightOptions)
+     {
+       gameNS.sceneManager.jumpToScene('Options');
+       gameNS.sceneManager.index = 3;
+     }
+     if(xCord >= this.xCredits && xCord <= this.xCredits + this.widthCredits && yCord >= this.yCredits && yCord <= this.yCredits + this.heightCredits)
      {
        gameNS.sceneManager.jumpToScene('CreditsScreen');
      }
@@ -82,12 +87,12 @@ class MainMenu extends Scene
     var ctxLeader = canvas.getContext('2d');
     ctxLeader.fillStyle ="#000000";
     // args are x,y,width,height
-    ctxLeader.fillRect(this.xLeader, this.yLeader, this.widthLeader, this.heightLeader);
+    ctxLeader.fillRect(this.xCredits, this.yCredits, this.widthCredits, this.heightCredits);
 
     var ctxTitle = canvas.getContext('2d');
     ctxTitle.font = '30px Agent Orange';
     ctxTitle.fillStyle = "#ffffff";
-    ctxTitle.fillText("Leaderboard", 110, 560);
+    ctxTitle.fillText("Credits", 140, 560);
 
 
 
